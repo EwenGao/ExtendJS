@@ -128,22 +128,26 @@ Array.prototype.OrderByDescing = function () {
 }
 //给指定的对象绑定HTML数据
 //o对象id属性值
+//key需要绑定数据的key
 //tag标签名称
 //attr属性值
 //fn回调函数
-Array.prototype.BindHtml = function (o, tag, attr, fn) {
+Array.prototype.BindHtml = function (o, key, tag, attr, fn) {
     var tags = [];
-    this.forEach(function (item) {
+    for (var i = 0; i < this.length; i++) {
+        var item = this[i];
         var obj = ElementById(o);
         var tagObj = document.createElement(tag);
         for (var a in attr) {
             tagObj.setAttribute(a, attr[a]);
         }
-        tagObj.innerHTML = item;
+        tagObj.innerHTML = item.hasOwnProperty(key) ? item[key] : item;
         tags.push(tagObj);
         obj.appendChild(tagObj);
-    });
-    fn(tags);
+    }
+    if (fn != undefined) {
+        fn(tags);
+    }
 }
 //简化查询dom对象的方法
 ElementById = function (elementId) {
