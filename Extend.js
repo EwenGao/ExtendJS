@@ -79,6 +79,10 @@ String.prototype.IsPhone = function () {
     var reg = /^1[3|4|5|8][0-9]\d{8}$/;
     return reg.test(this);
 }
+String.prototpe.RemoveHtml=function(){
+    var reg=/<[^/]*>/g;
+    ret this.replace(reg,"");
+}
 //监听键盘按键，只能输入数字。由于IE9以下不支持HTMLElement的原因，所以IE9以下的浏览器这里无法正常使用，除IE外，都支持，有待优化
 HTMLElement.prototype.KeyIsNumber = function () {
     this.style.imeMode = "disabled";
